@@ -42,9 +42,9 @@ bool ppr_tb_compare_files(char *expected_filename, char *result_filename);
 /* ---------------------------------------------------------------------------
  * Funktion: main
  * ------------------------------------------------------------------------- */
-#ifdef TESTBENCH
+/*#ifdef TESTBENCH
 
-/*int main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     if (strcmp(argv[1], "-summary") == 0)
     {
