@@ -80,7 +80,7 @@ extern bool has_next_bit(void);
  * Liefert das nächste Bit aus dem Eingabestrom
  * @return 
  */
-extern BIT read_bit(void);
+extern int read_bit(void);
 
 /**
  * Schreibt das Zeichen c, das nur den Zahlwert 0 oder 1 haben darf in den 
@@ -88,7 +88,7 @@ extern BIT read_bit(void);
  * 
  * @param c 
  */
-extern void write_bit(BIT c);
+extern void write_bit(int c);
 
 /* ------------------------------------------------------------------------- */
 #endif	/* IO_H */

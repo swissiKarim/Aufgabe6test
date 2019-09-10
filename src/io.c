@@ -195,8 +195,10 @@ extern bool has_next_bit(void)
 {
     return curr_pos_in_bit < 8 || has_next_char();
 }
-
-extern BIT read_bit(void)
+/* ----------------------------------------------------------------------------
+ *BIT to int
+ * ------------------------------------------------------------------------- */
+extern int read_bit(void)
 {
     /* 
      * Liest so lange aus dem Puffer, bis dieser leer ist. Ist dieser leer,
@@ -207,7 +209,7 @@ extern BIT read_bit(void)
     static int c = EOF;
 
     /* das aktuelle Bit */
-    BIT bit;
+    int bit;
     
     /* das allererste Zeichen holen, weil statische Variable nicht mit 
      * Rückgabe einer Funktion initialisiert werden kann */
@@ -224,7 +226,7 @@ extern BIT read_bit(void)
     return bit;
 }
 
-extern void write_bit(BIT bit)
+extern void write_bit(int bit)
 {
     /* 
      * Schreibt so lange in den Puffer, bis dieser voll ist. Ist dieser voll,
