@@ -37,7 +37,7 @@ typedef enum
 {
     BIT0 = 0,
     BIT1 = 1
-} BIT;
+} int ;
 
 /**
  *  0 = erfolgreiche Durchführung

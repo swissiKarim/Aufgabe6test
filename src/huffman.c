@@ -61,7 +61,7 @@ static void do_copy_chars(void)
 
 static void do_copy_bits(void)
 {
-    BIT bit;
+    int bit;
     
     while (has_next_bit())
     {
