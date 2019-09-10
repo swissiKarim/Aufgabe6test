@@ -44,7 +44,7 @@ bool ppr_tb_compare_files(char *expected_filename, char *result_filename);
  * ------------------------------------------------------------------------- */
 #ifdef TESTBENCH
 
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
     if (strcmp(argv[1], "-summary") == 0)
     {
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
     return (EXIT_SUCCESS);
 }
-#endif
+#endif*/
 
 /* ---------------------------------------------------------------------------
  * Funktion: ppr_tb_compare_retvals
