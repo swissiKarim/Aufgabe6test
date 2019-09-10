@@ -2,7 +2,7 @@
  * Includes
  * ========================================================================= */
 
-
+#include "huffman_common.h"
 #include "io.h"
 #include "huffman.h"
 
