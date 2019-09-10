@@ -24,7 +24,7 @@ OBJ:=$(SRC:.c=.o) $(TEST:.c=.o)
 # Control Script
 all: clean compile report
 clean:
-    make makefile_blatt06.mk ;
+    make makefile_blatt06 ;
 	find ./ -name *.o -exec rm -v {} \;
 	find ./ -name *.gcno -exec rm -v {} \;
 	find ./ -name *.gcda -exec rm -v {} \;
