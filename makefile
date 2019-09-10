@@ -1,6 +1,7 @@
 APPNAME=huffman
 APPMAIN=./src/main.cpp
 TESTMAIN=ppr_tb_test_cli
+MAKEAUF=makefile_blatt06.mk
 ###########################################################################
 # Which compiler
 CC=g++
@@ -24,7 +25,6 @@ OBJ:=$(SRC:.c=.o) $(TEST:.c=.o)
 # Control Script
 all: clean compile report
 clean:
-    make makefile_blatt06.mk \;
 	find ./ -name *.o -exec rm -v {} \;
 	find ./ -name *.gcno -exec rm -v {} \;
 	find ./ -name *.gcda -exec rm -v {} \;
@@ -39,7 +39,7 @@ clean:
 ###########################################################################
 # Body
 compile: $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(TESTMAIN) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJ) -o $(TESTMAIN) $(LIBS) $(MAKEAUF)
 
 %.o : %.c
 	$(CC) $(CFLAGS) $(LIBS) $(INCLUDES) -c $< -o $@
