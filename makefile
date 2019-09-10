@@ -1,5 +1,5 @@
-APPNAME=main.c
-APPMAIN=./src/genmakefile.cpp
+APPNAME=main
+APPMAIN=./src/main.cpp
 TESTMAIN=ppr_tb_test_cli
 ###########################################################################
 # Which compiler
