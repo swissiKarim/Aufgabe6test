@@ -34,7 +34,7 @@ clean:
 	-rm doxygen_*
 	-rm -rf html
 	-rm -rf latex
-clean:	make makefile_blatt06 ;
+    -make makefile_blatt06 
 
 ###########################################################################
 # Body
