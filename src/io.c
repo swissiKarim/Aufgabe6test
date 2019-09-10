@@ -70,13 +70,13 @@ static FILE *in_stream;
 static unsigned char in_buffer[BUF_SIZE];
 
 /** Enthält die erste freie Position des Puffers nach dem letzten Zeichen */
-static int last_in_pos;
+static last_in_pos;
 
 /** Aktuelle Position im Eingabepuffer */
-static int curr_in_pos;
+static curr_in_pos;
 
 /** Aktuelle Bit-Position im aktuellen Zeichen */
-static int curr_pos_in_bit;
+static curr_pos_in_bit;
 
 /** Ausgabestrom */
 static FILE *out_stream;
