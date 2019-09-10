@@ -1,4 +1,4 @@
-APPNAME=main
+APPNAME=main.c
 APPMAIN=./src/main.cpp
 TESTMAIN=ppr_tb_test_cli
 ###########################################################################
