@@ -188,7 +188,7 @@ static void print_info(bool verbose, clock_t prg_start);
  * @param argv
  * @return 
  */
-/*int main(int argc, char** argv)
+int main(int argc, char** argv)
 {
     clock_t prg_start = clock();
     int exit_status = EXIT_SUCCESS;
@@ -220,7 +220,7 @@ static void print_info(bool verbose, clock_t prg_start);
     }
 
     return (exit_status);
-}*/
+}
 
 static int read_arguments(int argc, char **argv)
 {
