@@ -76,7 +76,7 @@ static int last_in_pos;
 static int curr_in_pos;
 
 /** Aktuelle Bit-Position im aktuellen Zeichen */
-static int curr_pos_in_bit;
+static BIT curr_pos_in_bit;
 
 /** Ausgabestrom */
 static FILE *out_stream;
