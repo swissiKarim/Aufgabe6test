@@ -1,5 +1,5 @@
-APPNAME=main.c
-APPMAIN=./src/main.cpp
+APPNAME=huffman
+APPMAIN=./src/main.c
 TESTMAIN=ppr_tb_test_cli
 ###########################################################################
 # Which compiler
