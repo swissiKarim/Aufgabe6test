@@ -1,5 +1,5 @@
-APPNAME=huffman
-APPMAIN=./src/main.cpp
+APPNAME=main
+APPMAIN=./src/genmakefile.cpp
 TESTMAIN=ppr_tb_test_cli
 ###########################################################################
 # Which compiler
