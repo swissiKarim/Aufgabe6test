@@ -21,6 +21,7 @@
 #ifdef TESTBENCH
 #include "ppr_tb_logging.h"
 #endif
+#pragma GCC diagnostic ignored "-Wwrite-strings"
 
 /* ============================================================================
  * Funktionsprotoytpen
