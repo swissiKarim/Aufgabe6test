@@ -200,7 +200,7 @@ int main(int argc, char** argv)
         switch (mode)
         {
         case COMPRESS:
-            compress(in_filename, out_filename); 
+            compress(in_filename, out_filename); /* level nicht verwendet */
             print_info(verbose, prg_start);
             break;
 

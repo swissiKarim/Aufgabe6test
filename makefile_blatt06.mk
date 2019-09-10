@@ -34,7 +34,7 @@ TEST = ppr_tb_test_cli
 # Regel fuer das Vorbereiten von Splint
 splint-setup :
 
-	@for file in $(BUILD_DIR)/*.c; do \
+	@for file in src/*.c; do \
 		sed 's/#include <sys\\stat.h>/#include <sys\/stat.h>/g' "$$file" > $(TMP_MAIN); \
 		mv $(TMP_MAIN) "$$file"; \
 	done
@@ -46,12 +46,12 @@ splint-setup :
 compile-setup : 
 
     # Testprogramm im build-Verzeichnis erzeugen...
-	@gcc $(TESTS_DIR)/$(TEST).c $(SRC_GLOBAL_DIR)/$(LOGGING).c \
+	@gcc test/$(TEST).c $(SRC_GLOBAL_DIR)/$(LOGGING).c \
 	             -o $(BUILD_DIR)/$(TEST).o \
 	             -I$(SRC_GLOBAL_DIR) -DTESTBENCH;
 
     # wait_and_exit im build-Verzeichnis erzeugen
-	@gcc $(SRC_GLOBAL_DIR)/$(CTRL).c -o $(BUILD_DIR)/$(CTRL).o \
+	@gcc $(SRC_GLOBAL_DIR)/$(CTRL).c -o src/$(CTRL).o \
 	                                 -DFUNCTION_TEST;
                                      
 # ----------------------------------------------------------------------------
@@ -67,7 +67,7 @@ start:
 	@echo "+--------------------------------------------------------------+"
 	@echo
     # Testdateien ins build-Verzeichnis kopieren
-	-@cp ./$(TEST_DIR)/testfiles/* $(BUILD_DIR)/ 2> /dev/null
+	-@cp ./test/testfiles/* src/ 2> /dev/null
 
 
 # Regeln fuer die einzelnen Testfaelle
@@ -79,7 +79,7 @@ test1 :
 	@echo    - Soll-Verhalten : Korrekte Eingabe, Programmende mit Exitcode 0
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -c -o out.txt -l7 -v in.txt; \
             ./$(TEST).o -retval 0 $$?; ) &
 
@@ -95,11 +95,11 @@ test2 :
 	@echo    - Soll-Verhalten : Fehlermeldung, Programmabbruch mit Fehlercode 2
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o ; \
             ./$(TEST).o -retval 2 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -111,11 +111,11 @@ test3 :
 	@echo    - Soll-Verhalten : Fehlermeldung, Programmabbruch mit Fehlercode 2
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -c -o in.txt; \
             ./$(TEST).o -retval 2 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
     
@@ -127,11 +127,11 @@ test4 :
 	@echo    - Soll-Verhalten : Korrekte Eingabe, Programmende mit Exitcode 0
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -d -o out.txt in.txt; \
             ./$(TEST).o -retval 0 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -143,11 +143,11 @@ test5 :
 	@echo    - Soll-Verhalten : Fehlermeldung, Programmabbruch mit Fehlercode 2
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -c -x in.txt; \
             ./$(TEST).o -retval 2 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -159,11 +159,11 @@ test6 :
 	@echo    - Soll-Verhalten : Fehlermeldung, Programmabbruch mit Fehlercode 2
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -c -l in.txt; \
             ./$(TEST).o -retval 2 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -175,11 +175,11 @@ test7 :
 	@echo    - Soll-Verhalten : Fehlermeldung, Programmabbruch mit Fehlercode 2
 	@echo
    
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -c -l45 in.txt; \
             ./$(TEST).o -retval 2 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -191,11 +191,11 @@ test8 :
 	@echo    - Soll-Verhalten : Fehlermeldung, Programmabbruch mit Fehlercode 2
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -c -o in.txt in.txt; \
             ./$(TEST).o -retval 2 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -207,11 +207,11 @@ test9 :
 	@echo    - Soll-Verhalten : Fehlermeldung, Programmabbruch mit Fehlercode 2
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o in.txt; \
             ./$(TEST).o -retval 2 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -223,11 +223,11 @@ test10 :
 	@echo    - Soll-Verhalten : Fehlermeldung, Programmabbruch mit Fehlercode 3
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -c not_exists.txt; \
             ./$(TEST).o -retval 3 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -240,11 +240,11 @@ test11 :
 	@echo
     # Datei Prüfung einbauen.
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -c -v -o gross.hc gross.txt; \
             ./$(TEST).o -retval 0 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
 
@@ -256,15 +256,15 @@ test12 :
 	@echo    - Soll-Verhalten : Laufzeitmessung, bitweises Kopieren
 	@echo
     
-	-@cd $(BUILD_DIR) \
+	-@cd src \
         && (./$(USER_SUBMISSION).o -d -v -o gross.hd gross.txt; \
             ./$(TEST).o -retval 0 $$?; ) &
 
-	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
+	-@./src/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
                              
 end :
     # Endbewertung durchfuehren (OK-Anzahl in %) 
-	-@cd $(BUILD_DIR) \
+	-@cd src \
 	&& ./$(TEST).o -summary 12 ../$(LEISTUNGEN)_$(TEST_DIR).csv

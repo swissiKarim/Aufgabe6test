@@ -45,7 +45,7 @@
  * das niederwertigste Bit geliefert. Es wird davon ausgegangen, dass POS 
  * einen Wert zwischen 0 und 7 hat. Ansonsten ist die Rückgabe undefiniert.
  */
-#define PUT_BIT(C, int, POS) ((C) | ((unsigned char) (int) << (7 - (POS))))
+#define PUT_BIT(C, BIT, POS) ((C) | ((unsigned char) (BIT) << (7 - (POS))))
 
 
 /* ============================================================================
@@ -196,7 +196,7 @@ extern bool has_next_bit(void)
     return curr_pos_in_bit < 8 || has_next_char();
 }
 
-extern int read_bit(void)
+extern BIT read_bit(void)
 {
     /* 
      * Liest so lange aus dem Puffer, bis dieser leer ist. Ist dieser leer,
@@ -207,7 +207,7 @@ extern int read_bit(void)
     static int c = EOF;
 
     /* das aktuelle Bit */
-    int bit;
+    BIT bit;
     
     /* das allererste Zeichen holen, weil statische Variable nicht mit 
      * Rückgabe einer Funktion initialisiert werden kann */
@@ -224,7 +224,7 @@ extern int read_bit(void)
     return bit;
 }
 
-extern void write_bit(int bit)
+extern void write_bit(BIT bit)
 {
     /* 
      * Schreibt so lange in den Puffer, bis dieser voll ist. Ist dieser voll,
