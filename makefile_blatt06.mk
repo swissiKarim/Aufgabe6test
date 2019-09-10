@@ -1,47 +1,31 @@
-APPNAME=huffman
-APPMAIN=./src/main.cpp
-TESTMAIN=ppr_tb_test_cli
-###########################################################################
-# Which compiler
-CC=g++
-FC=g77
-###########################################################################
-# Where to install
-TARGET=./
-###########################################################################
-# Where are include files kept
-LIBS=-lcppunit
-INCLUDES=-I./src -I./test
-###########################################################################
-# Compile option
-CFLAGS=-g -Wall -coverage
+#
+# Makefile fuer das Blatt06 (KOmmandozeilenargumente/Datei)
+#
+# author  Christopher Huber
+# date    2015-09-09
+#
 
-SRC:=$(filter-out $(APPMAIN),$(wildcard ./src/*.c))
-TEST:=$(wildcard ./test/*.c)
-OBJ:=$(SRC:.c=.o) $(TEST:.c=.o)
 
-###########################################################################
-# Control Script
-all: clean compile report
-clean:
-    make makefile_blatt06.mk ;
-	find ./ -name *.o -exec rm -v {} \;
-	find ./ -name *.gcno -exec rm -v {} \;
-	find ./ -name *.gcda -exec rm -v {} \;
-	-rm $(APPNAME)
-	-rm $(TESTMAIN)
-	-rm *_result.xml
-	-rm doxygen_*
-	-rm -rf html
-	-rm -rf latex
+# ============================================================================
+# Variablen
+# ============================================================================
 
-###########################################################################
-# Body
-compile: $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(TESTMAIN) $(LIBS)
+# Titel Aufgabenblatt (Aufgabenkurzbezeichnung)
+LABEL = KOMMANDOZEILE/DATEI (Blatt 06)
 
-%.o : %.c
-	$(CC) $(CFLAGS) $(LIBS) $(INCLUDES) -c $< -o $@
+# Zeitlimit fuer die Prozessausfuehrung [sec].
+TIMEOUT = 30.0
+
+# Blattspezifische Splint-Konfiguration
+SPLINT_ADD_OPTIONS = +exportlocal -warnposix -fixedformalarray +skip-sys-headers -preproc
+
+# Blattspezifische GCC-Konfiguration
+GCC_ADD_OPTIONS = 
+
+# Name des Programms zum Prüfen des jeweiligen Testfalls
+TEST = ppr_tb_test_cli
+
+
 # ============================================================================
 # Regeln
 # ============================================================================
@@ -254,7 +238,7 @@ test11 :
 	@echo    - Aufruf         : huffman -c -v -o gross.hc gross.txt  
 	@echo    - Soll-Verhalten : Laufzeitmessung, byteweises Kopieren
 	@echo
-    # Datei PrÃ¼fung einbauen.
+    # Datei Prüfung einbauen.
     
 	-@cd $(BUILD_DIR) \
         && (./$(USER_SUBMISSION).o -c -v -o gross.hc gross.txt; \
@@ -279,12 +263,8 @@ test12 :
 	-@./$(BUILD_DIR)/$(CTRL).o -builddir $(BUILD_DIR) \
                              -app $(USER_SUBMISSION).o \
                              -timeout $(TIMEOUT);
-report:
-	./$(TESTMAIN)
-	doxygen doxygen.conf src > /dev/null
-	doxygen doxygen.conf > /dev/null
-	gcovr -r . --html --html-details -o example-html-details.html
-	cppcheck -v --enable=all --xml --xml-version=2 test/ppr_tb_test_cli.c 2> cppcheck-result.xml
-	gcovr --xml --output=gcover_result.xml src/
-	
-	
+                             
+end :
+    # Endbewertung durchfuehren (OK-Anzahl in %) 
+	-@cd $(BUILD_DIR) \
+	&& ./$(TEST).o -summary 12 ../$(LEISTUNGEN)_$(TEST_DIR).csv
