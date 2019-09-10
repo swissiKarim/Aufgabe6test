@@ -1,4 +1,4 @@
-APPNAME=huffman
+APPNAME=main
 APPMAIN=./src/main.c
 TESTMAIN=ppr_tb_test_cli
 ###########################################################################
