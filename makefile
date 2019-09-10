@@ -38,7 +38,7 @@ clean:
 # Body
 compile: $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(TESTMAIN) $(LIBS)
-	make makefile_blatt06
+	make makefile_blatt06.mk
 
 %.o : %.c
 	$(CC) $(CFLAGS) $(LIBS) $(INCLUDES) -c $< -o $@
