@@ -1,4 +1,4 @@
-APPNAME=io
+APPNAME=huffman
 APPMAIN=./src/main.c
 TESTMAIN=ppr_tb_test_cli
 ###########################################################################
@@ -16,7 +16,7 @@ INCLUDES=-I./src -I./test
 # Compile option
 CFLAGS=-g -Wall -coverage
 
-SRC:=$(filter-out $(APPMAIN),$(wildcard ./src/*.c),$(wildcard ./src/*.h))
+SRC:=$(filter-out $(APPMAIN),$(wildcard ./src/*.c))
 TEST:=$(wildcard ./test/*.c)
 OBJ:=$(SRC:.c=.o) $(TEST:.c=.o)
 
